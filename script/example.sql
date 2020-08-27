@@ -1,0 +1,11 @@
+
+DROP PROCEDURE IF EXISTS `sp1`;
+
+DELIMITER $$
+CREATE PROCEDURE sp1(IN pStr1 VARCHAR(20), IN pStr2 VARCHAR(20),
+                     OUT pConCat VARCHAR(100))
+BEGIN
+  SET pConCat := CONCAT(pStr1, pStr2);
+END $$
+
+DELIMITER ;
