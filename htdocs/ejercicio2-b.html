@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+      </head>
+<body>
+
+<h2>Alta Actor</h2>
+
+
+    <input type="hidden" name="_method" value="put" />
+    <label for="titulo">Título</label><br>
+    <input type="text" id="titulo" name="titulo"><br>
+    <label for="anio">Año</label><br>
+    <input type="text" id="anio" name="anio"><br>
+    <label for="categoria">Categoría</label><br>
+    <select id="categoria" name="categoria"> </select><br><br>
+    <input type="button" onclick="altaActor()" value="Enviar">
+
+</body>
+<script>
+    function altaActor() {        
+        var xhttp = new XMLHttpRequest();
+        console.log(query_params)
+        xhttp.open("PUT", "/cgi-bin/ejercicio2.py", false);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhttp.send();
+    }
+    </script>
+</html>

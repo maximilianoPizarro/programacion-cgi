@@ -9,6 +9,8 @@ class Main():
                 self.buscarPelicula()
             if os.environ['REQUEST_METHOD'] == "POST": 
                 self.setCategorias()
+            if os.environ['REQUEST_METHOD'] == "PUT":           
+                self.altaActor()     
         except:
             print("Server Internal Error : request method not allowed");
     def conectar(self):
@@ -47,7 +49,16 @@ class Main():
         cnx.close()
         print("<body>");        
         print("</body>");
-        print("</html>");    
-
+        print("</html>"); 
+    def altaActor(self):
+        print ("<html>");
+        print ("<head>");
+        print ("<meta name='author' content='Maximiliano Pizarro'>");
+        print("<style>table, th, td { border: 1px solid black; border-collapse: collapse;}th, td { padding: 15px; text-align: left;}#t01 { width: 100%; background-color: #f1f1c1;}</style>")
+        form = cgi.FieldStorage() 
+        print(form["titulo"].value)
+        print("<body>");        
+        print("</body>");
+        print("</html>"); 
 if __name__ == "__main__":
     Main()
