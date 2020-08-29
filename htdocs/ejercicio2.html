@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-      </head>
+<head><meta charset="UTF-8"></head>
 <body onload="setCategorias()">
-
 <h2>Búsqueda de películas</h2>
-
+<div>
 <form action="/cgi-bin/ejercicio2.py" method="GET">
     <label for="titulo">Título</label><br>
     <input type="text" id="titulo" name="titulo"><br>
@@ -16,7 +13,18 @@
     <select id="categoria" name="categoria"> </select><br><br>
     <input type="submit" value="Enviar">
 </form> 
-
+</div>
+<div>
+    <h2>Alta Actor</h2>
+    <label for="labelname">Nombre</label><br>
+    <input type="text" id="nombre" name="nombre"/><br>
+    <label for="labelapellido">Apellido</label><br>
+    <input type="text" id="apellido" name="apellido"/><br>
+    <label for="labelanio">Año Pelicula</label><br>
+    <input type="text" id="anio" name="anio"/><br><br>
+    <input type="button" onclick="altaActor()" value="Enviar"/>
+    <div id="mensaje"></div>
+</div>
 </body>
 <script>
     function setCategorias() {
@@ -25,6 +33,18 @@
         xhttp.open("POST", "/cgi-bin/ejercicio2.py", false);
         xhttp.send();
         var ele = document.getElementById("categoria").innerHTML=xhttp.responseText;
+    }
+
+    function altaActor() {        
+        var xhttp = new XMLHttpRequest();
+        var nombre="nombre="+document.getElementById("nombre").value;
+        var apellido="apellido="+document.getElementById("apellido").value;
+        var anio="anio="+document.getElementById("anio").value;
+        xhttp.open("PUT", "/cgi-bin/ejercicio2.py", false);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(nombre+"&"+apellido+"&"+anio);
+        var ele = document.getElementById("mensaje").innerHTML=xhttp.responseText;
+
     }
     </script>
 </html>

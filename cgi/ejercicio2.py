@@ -1,6 +1,6 @@
 #!"C:\Python38\python.exe"
 import cgi, cgitb, os, mysql.connector
-                                  
+cgitb.enable()
 class Main():   
     def __init__(self):                                 
         try:            
@@ -50,15 +50,17 @@ class Main():
         print("<body>");        
         print("</body>");
         print("</html>"); 
-    def altaActor(self):
-        print ("<html>");
-        print ("<head>");
-        print ("<meta name='author' content='Maximiliano Pizarro'>");
-        print("<style>table, th, td { border: 1px solid black; border-collapse: collapse;}th, td { padding: 15px; text-align: left;}#t01 { width: 100%; background-color: #f1f1c1;}</style>")
+    def altaActor(self):        
         form = cgi.FieldStorage() 
-        print(form["titulo"].value)
-        print("<body>");        
-        print("</body>");
-        print("</html>"); 
+        cnx=self.conectar()
+        cursor = cnx.cursor()
+        args = (form["nombre"].value,form["apellido"].value,form["anio"].value)
+        cursor.callproc('alta', args)
+        for result in cursor.stored_results():
+            resultados=result.fetchall()
+            for row in resultados:                
+                print ("<ul><li>ID : %s</li><li>Nombre : %s</li><li>Apellido : %s</li><li>Cantidad de Peliculas : %d</li></ul>"%(row[0],row[1],row[2],row[3]))        
+        cursor.close()
+        cnx.close()
 if __name__ == "__main__":
     Main()
